@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Triplet IT — F5 Consultancy</title>
+<meta name="theme-color" content="#000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e31c24;--blue:#1aa6ff;--green:#39e070;--muted:#9aa3aa;--line:#1c2228}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#000;color:#f4f5f6;font-family:Inter,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.w{width:min(1140px,calc(100% - 64px));margin-inline:auto}
+.osw{font-family:Oswald,Impact,"Arial Narrow",sans-serif;text-transform:uppercase}
+
+header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.92)}
+.nav{height:72px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px}
+.bars{width:20px;display:grid;gap:3px}
+.bars i{display:block;height:2.5px;background:var(--red)}
+.bars i:nth-child(1){width:20px}.bars i:nth-child(2){width:14px;margin-left:6px}.bars i:nth-child(3){width:17px;margin-left:3px}
+.brand b{display:block;font-size:15px;letter-spacing:.6px;font-weight:800}
+.brand small{display:block;margin-top:3px;font-size:8px;letter-spacing:1.7px;color:var(--red);font-weight:700}
+.menu{flex:1;display:flex;justify-content:center;gap:22px;font-size:11px;font-weight:700;letter-spacing:.8px;color:#d5dadd}
+.menu a:hover{color:#fff}
+.out{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border:1px solid var(--red);color:var(--red);font-size:11px;font-weight:800;letter-spacing:.35px;background:transparent;border-radius:8px}
+.out:hover{background:var(--red);color:#fff}
+.ham{display:none;margin-left:auto;width:38px;height:38px;border:0;background:#14181c;color:#fff;border-radius:8px}
+.mob{display:none}
+
+.stage{position:relative;overflow:hidden}
+.stage:before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 16% 38%,rgba(227,28,36,.16),transparent 44%),
+    radial-gradient(ellipse at 74% 32%,rgba(26,166,255,.14),transparent 52%);
+}
+.stage-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
+.stage-bg canvas{width:100%;height:100%;display:block}
+.hero{position:relative;padding:84px 0 36px;overflow:visible;z-index:1}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.ey{color:var(--red);font-size:12px;font-weight:800;letter-spacing:1.6px;margin:0 0 18px}
+h1{margin:0;font-size:clamp(40px,4.8vw,64px);line-height:.92;letter-spacing:-.4px;font-weight:600}
+h1 .sq{display:inline-block;width:13px;height:13px;margin-left:8px;background:var(--red);vertical-align:middle;transform:translateY(-8px)}
+.lead{margin:22px 0 28px;max-width:46ch;color:#e8ecef;font-size:15px;line-height:1.7;font-weight:500}
+.acts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.redbtn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;background:linear-gradient(180deg,#f13a42,#d4141c);color:#fff;font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;border:0;border-radius:10px;box-shadow:0 0 24px rgba(227,28,36,.28)}
+.link{font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#fff}
+.art{position:relative}
+.term{position:relative;background:#070b0e;border:0;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 50px rgba(26,166,255,.08)}
+.th{height:36px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#10171c;border:0;font:12px ui-monospace,Menlo,monospace;color:#c9d2d7}
+.ds{display:flex;gap:6px}.ds i{width:10px;height:10px;border-radius:50%}
+.ds i:nth-child(1){background:#ff5f57}.ds i:nth-child(2){background:#febc2e}.ds i:nth-child(3){background:#28c840}
+pre{margin:0;padding:16px 16px 10px;min-height:248px;font:12.4px/1.55 ui-monospace,Menlo,monospace;color:#c5ccd3}
+.c-b{color:#6cb6ff}.c-g{color:#3dff7a}.c-w{color:#f4f6f7}
+.st{padding:12px 16px 16px;min-height:92px;border:0;background:#080c0f;font:11.5px/1.75 ui-monospace,Menlo,monospace;color:#3dff7a}
+.term .cur{display:inline-block;width:7px;height:13px;margin-left:1px;background:#3dff7a;vertical-align:-2px;animation:blink 1.05s step-end infinite}
+.st div{opacity:0;transform:translateY(5px);animation:stin .38s ease forwards}
+@keyframes blink{50%{opacity:0}}
+@keyframes stin{to{opacity:1;transform:none}}
+
+.flowbox{padding:8px 0 28px;position:relative;overflow:visible;z-index:1}
+.arch-row{display:flex;align-items:center;gap:0;position:relative;z-index:1}
+.node{
+  flex:1 1 0;min-width:0;min-height:152px;padding:18px 10px;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;
+  background:linear-gradient(180deg,#121820,#0a0e13);border:0;
+  box-shadow:inset 0 0 24px rgba(255,255,255,.03),0 12px 30px rgba(0,0,0,.35);
+  color:#fff;
+}
+.node.risk{
+  color:var(--red);
+  box-shadow:0 0 28px rgba(227,28,36,.26),inset 0 0 22px rgba(227,28,36,.07);
+}
+.node.risk.f5{box-shadow:0 0 38px rgba(227,28,36,.42),inset 0 0 24px rgba(227,28,36,.10)}
+.node.ok{
+  color:var(--green);
+  box-shadow:0 0 28px rgba(57,224,112,.28),inset 0 0 22px rgba(57,224,112,.08);
+}
+.node img{width:42px;height:42px}
+.node.risk img{filter:drop-shadow(0 0 8px rgba(227,28,36,.55))}
+.node.ok img{filter:drop-shadow(0 0 8px rgba(57,224,112,.5))}
+.node strong{font-size:12px;letter-spacing:.5px;color:#f4f5f6}
+.node.risk small{font-size:11px;color:#e08a8e}
+.node.ok small{font-size:11px;color:#7ee0a3}
+.node small{font-size:11px;color:#c5ccd1}
+.stream{width:42px;height:86px;flex:0 0 42px;position:relative;overflow:hidden}
+.stream i{position:absolute;left:0;border-radius:50%;filter:blur(.2px);animation:drift 1.15s linear infinite}
+@keyframes drift{from{transform:translate(-8px,-50%);opacity:.15}18%{opacity:1}82%{opacity:1}to{transform:translate(42px,-50%);opacity:.1}}
+.stream.from{clip-path:polygon(0 12%,100% 38%,100% 62%,0 88%)}
+.stream.mid{height:52px;clip-path:none}
+.stream.to{clip-path:polygon(0 38%,100% 12%,100% 88%,0 62%)}
+.racks{display:flex;flex-direction:column;justify-content:center;gap:11px;margin-left:8px;flex:0 0 34px}
+.racks span{
+  display:block;width:22px;height:9px;margin-left:12px;border:1px solid #39e070;border-radius:2px;position:relative;
+  box-shadow:inset 3px 2px 0 0 #39e070, inset 7px 2px 0 0 #39e070;
+}
+.racks span:before{
+  content:"";position:absolute;left:-12px;top:4px;width:12px;height:1px;background:#39e070;
+}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);background:#0b1014;border:0;border-radius:14px;overflow:hidden;margin:26px auto 0}
+.metric{padding:18px 20px;position:relative;min-height:94px}
+.metric + .metric{border:0}
+.metric .t{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.55px;text-transform:uppercase;color:#8a9298}
+.metric img{width:26px;height:26px;flex-shrink:0}
+.metric b{display:inline-block;margin-top:10px;font-size:28px;font-weight:600}
+.metric em{font-style:normal;color:var(--red);font-size:11px;font-weight:800;margin-left:6px;letter-spacing:.4px}
+.sp{position:absolute;right:14px;bottom:14px;width:68px;height:20px}
+.sp polyline{fill:none;stroke:var(--red);stroke-width:1.6;stroke-linecap:round}
+
+section{padding:78px 0}
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;margin-bottom:28px}
+.k{color:var(--red);font-size:11px;font-weight:800;letter-spacing:1.5px;margin:0 0 10px}
+h2{margin:0;font-size:clamp(32px,3.4vw,46px);line-height:1;font-weight:600;letter-spacing:.2px}
+h2 .sq{display:inline-block;width:12px;height:12px;margin-left:8px;background:var(--red);vertical-align:middle;transform:translateY(-6px)}
+.copy{margin:0;color:var(--muted);font-size:14.5px;line-height:1.7}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{min-height:208px;padding:22px 20px;background:
+    radial-gradient(ellipse at 100% 100%,rgba(227,28,36,.32),transparent 52%),
+    #0c1116;border:0;border-radius:14px;position:relative;overflow:hidden}
+.card:after{
+  content:"";position:absolute;right:-8px;bottom:-8px;width:140px;height:110px;pointer-events:none;opacity:.85;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 110'%3E%3Cg fill='none' stroke='%23e31c24' stroke-width='1' opacity='.45'%3E%3Cpath d='M10 90L40 60L70 78L100 40L130 55'/%3E%3Cpath d='M20 110L50 70L90 95L120 50'/%3E%3C/g%3E%3Cg fill='%23e31c24'%3E%3Ccircle cx='40' cy='60' r='2.2'/%3E%3Ccircle cx='70' cy='78' r='2.2'/%3E%3Ccircle cx='100' cy='40' r='2.2'/%3E%3Ccircle cx='50' cy='70' r='1.8'/%3E%3Ccircle cx='90' cy='95' r='1.8'/%3E%3Ccircle cx='120' cy='50' r='1.8'/%3E%3C/g%3E%3C/svg%3E") no-repeat right bottom;
+}
+.card img{width:36px;height:36px;position:relative;z-index:1}
+.card h3{margin:16px 0 8px;font-size:14px;letter-spacing:.3px;position:relative;z-index:1}
+.card p{margin:0;color:#8d969c;font-size:13px;line-height:1.5;max-width:28ch;position:relative;z-index:1}
+.card i{position:absolute;left:20px;bottom:16px;color:var(--red);font-style:normal;z-index:1}
+
+.ucards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.ucard{min-height:248px;padding:24px 22px 48px;background:
+    radial-gradient(ellipse at 100% 100%,rgba(26,166,255,.28),transparent 52%),
+    #0c1116;border:0;border-radius:14px;position:relative;overflow:hidden}
+.ucard.protect{background:
+    radial-gradient(ellipse at 100% 100%,rgba(26,166,255,.18),transparent 48%),
+    radial-gradient(ellipse at 0% 100%,rgba(57,224,112,.16),transparent 46%),
+    #0c1116}
+.ucard:after{
+  content:"";position:absolute;right:-8px;bottom:-8px;width:140px;height:110px;pointer-events:none;opacity:.8;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 110'%3E%3Cg fill='none' stroke='%231aa6ff' stroke-width='1' opacity='.45'%3E%3Cpath d='M10 90L40 60L70 78L100 40L130 55'/%3E%3Cpath d='M20 110L50 70L90 95L120 50'/%3E%3C/g%3E%3Cg fill='%231aa6ff'%3E%3Ccircle cx='40' cy='60' r='2.2'/%3E%3Ccircle cx='70' cy='78' r='2.2'/%3E%3Ccircle cx='100' cy='40' r='2.2'/%3E%3Ccircle cx='50' cy='70' r='1.8'/%3E%3Ccircle cx='90' cy='95' r='1.8'/%3E%3Ccircle cx='120' cy='50' r='1.8'/%3E%3C/g%3E%3C/svg%3E") no-repeat right bottom;
+}
+.ucard img{width:36px;height:36px;position:relative;z-index:1}
+.ucard h3{margin:16px 0 8px;font-size:14px;letter-spacing:.3px;position:relative;z-index:1}
+.ucard p{margin:0;color:#8d969c;font-size:13px;line-height:1.5;max-width:42ch;position:relative;z-index:1}
+.ucard ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.ucard li{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:#b8dcf5;background:rgba(26,166,255,.1);padding:5px 8px;border-radius:6px}
+.ucard i{position:absolute;left:22px;bottom:18px;color:var(--blue);font-style:normal;z-index:1}
+.upoints{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.upoint{padding:18px 16px;background:#0c1116;border-radius:14px}
+.upoint img{width:28px;height:28px}
+.upoint b{display:block;margin:12px 0 6px;font-size:12px;letter-spacing:.6px}
+.upoint p{margin:0;color:#8d969c;font-size:13px;line-height:1.45}
+
+.cr{display:grid;grid-template-columns:minmax(220px,.32fr) 1fr;gap:40px;align-items:center}
+.cursor{display:inline-block;width:14px;height:14px;margin-left:10px;background:var(--red);vertical-align:middle;transform:translateY(-6px)}
+.certs-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;border:0;background:transparent}
+.cell{min-height:0;padding:20px 12px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;background:#0c1116;border:0;border-radius:14px}
+.cell + .cell{border:0}
+.cell .top{height:108px;width:100%;display:flex;align-items:center;justify-content:center}
+.cell img{width:100px;height:100px;object-fit:contain;margin:0}
+.cell small{color:#c5ccd1;font-size:10px;line-height:1.45;letter-spacing:.3px;margin-top:8px;min-height:2.9em}
+.cell .n{font-size:clamp(28px,2.4vw,38px);font-weight:600;line-height:1}
+.cell .m{margin-top:8px;font-size:16px;font-weight:600;letter-spacing:.4px}
+.cell .s{margin-top:8px;font-size:10px;letter-spacing:.4px;color:#8d969c}
+
+#trust{padding-bottom:56px}
+.trust-top{display:grid;grid-template-columns:minmax(240px,.36fr) 1fr;gap:36px;align-items:center}
+.vals{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:4px}
+.v{min-height:0;padding:6px 8px 4px;background:transparent;border:0}
+.v:first-child{padding-left:0}
+.v img{width:28px;height:28px}
+.v b{display:block;margin:14px 0 8px;font-size:12px;letter-spacing:.7px}
+.v p{margin:0;color:#8d969c;font-size:13px;line-height:1.45;max-width:22ch}
+.note{margin:42px 0 26px;color:#d5dce0;font-size:11px;letter-spacing:1.1px;text-transform:uppercase;text-align:center;font-weight:600}
+.logos{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.logos img{height:40px;width:auto;max-width:168px;object-fit:contain;opacity:.92;border:0;background:transparent;padding:0}
+.logos .more{color:#8a9298;font-size:10px;letter-spacing:1.6px;font-weight:700;white-space:nowrap}
+
+.cta{margin:8px 0 42px;padding:36px 0 8px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.cta h2{max-width:16ch}
+.cta p{margin:10px 0 0;color:#b7c0c5}
+foot,footer{padding:0 0 36px;text-align:center;color:#5a6369;font-size:11px;letter-spacing:1.3px}
+
+@media(max-width:980px){
+  .menu,.out{display:none}.ham{display:block}
+  .mob.open{display:flex;flex-direction:column;gap:14px;padding:10px 32px 18px}
+  .hg,.split,.cr{grid-template-columns:1fr}
+  .certs-row{grid-template-columns:1fr 1fr}
+  .cards,.ucards{grid-template-columns:1fr 1fr}
+  .trust-top{grid-template-columns:1fr}
+  .vals,.metrics,.upoints{grid-template-columns:1fr 1fr}
+  .v:nth-child(odd){padding-left:0}
+  .v:nth-child(n+3){padding-top:8px}
+  .metric + .metric{border:0}
+  .logos{justify-content:flex-start}
+  .cta{flex-direction:column;align-items:flex-start}
+  .arch-row{overflow:auto}
+  .racks{display:none}
+  .w{width:min(100%,calc(100% - 32px))}
+}
+@media(max-width:620px){
+  .cards,.vals,.metrics,.certs-row,.ucards,.upoints{grid-template-columns:1fr}
+  .v,.v:nth-child(n+3){border:0;padding:18px 0 8px}
+  .v:first-child{padding-top:0}
+  .cell + .cell{border:0}
+  section{padding:52px 0}
+  h1{font-size:36px}
+}
+@media(prefers-reduced-motion:reduce){
+  .stream i,.term .cur,.st div{animation:none}
+  .st div{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="w nav">
+    <a class="brand" href="#top"><span class="bars"><i></i><i></i><i></i></span><span><b>TRIPLET IT</b><small>F5 CONSULTANCY</small></span></a>
+    <nav class="menu">
+      <a href="#expertise">EXPERTISE</a>
+      <a href="#unifi">UNIFI</a>
+      <a href="#arch">SOLUTIONS</a>
+      <a href="#trust">CASE STUDIES</a>
+      <a href="#certs">OVER ONS</a>
+      <a href="pages/coming-soon.html">CONTACT</a>
+    </nav>
+    <a class="out" href="pages/coming-soon.html">CONTACT OPNEMEN →</a>
+    <button class="ham" id="ham" type="button" aria-label="Menu">☰</button>
+  </div>
+  <div class="mob w" id="mob">
+    <a href="#expertise">Expertise</a><a href="#unifi">UniFi</a><a href="#arch">Solutions</a><a href="#certs">Over ons</a><a href="#trust">Case studies</a><a href="pages/coming-soon.html">Contact opnemen →</a>
+  </div>
+</header>
+
+<main id="top">
+<div class="stage">
+  <div class="stage-bg" aria-hidden="true"><canvas id="worldmap"></canvas></div>
+<section class="hero">
+  <div class="w hg">
+    <div>
+      <p class="ey">F5 EXPERTISE. ZERO COMPROMISE.</p>
+      <h1 class="osw">COMPLEX TRAFFIC.<br>CRITICAL SYSTEMS.<br>NO GUESSWORK<span class="sq" aria-hidden="true"></span></h1>
+      <p class="lead">Gespecialiseerde F5 BIG-IP consultancy voor overheid en enterprise. Ontwerp, optimalisatie en beheer van bedrijfskritische applicatie-infrastructuren.</p>
+      <div class="acts">
+        <a class="redbtn" href="#expertise">Wat wij doen →</a>
+        <a class="link" href="pages/coming-soon.html">Direct contact →</a>
+      </div>
+    </div>
+    <div class="art">
+      <div class="term">
+        <div class="th"><span>tmsh</span><span class="ds"><i></i><i></i><i></i></span></div>
+<pre id="tmsh-cfg"><span class="c-b">ltm</span> <span class="c-b">virtual</span> <span class="c-w">/Common/production_https</span> {
+  <span class="c-b">destination</span> <span class="c-w">10.10.20.15:https</span>
+  <span class="c-b">ip-protocol</span> tcp
+  <span class="c-b">profiles</span> {
+    clientssl { }
+    http { }
+    tcp-wan-optimized { }
+  }
+  <span class="c-b">pool</span> <span class="c-w">/Common/web_pool</span>
+  <span class="c-b">rules</span> {
+    https_redirect
+    security_policy
+  }
+}</pre>
+        <div class="st" id="tmsh-st">[✓] APPLICATION AVAILABLE<br>[✓] TLS SECURED<br>[✓] TRAFFIC OPTIMIZED<br>[✓] SECURITY ENFORCED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="w flowbox" id="arch">
+  <div class="arch-row">
+    <a class="node risk" href="pages/coming-soon.html"><img src="assets/internet.svg" alt=""><strong>INTERNET</strong><small>Onvertrouwd</small></a>
+    <div class="stream from red" aria-hidden="true"></div>
+    <a class="node risk f5" href="pages/coming-soon.html"><img src="assets/f5-big-ip.svg" alt=""><strong>F5 BIG-IP</strong><small>VIP</small></a>
+    <div class="stream mid red" aria-hidden="true"></div>
+    <a class="node risk" href="pages/coming-soon.html"><img src="assets/tls-waf.svg" alt=""><strong>TLS / WAF</strong><small>Inspectie</small></a>
+    <div class="stream mid green" aria-hidden="true"></div>
+    <a class="node ok" href="pages/coming-soon.html"><img src="assets/pool.svg" alt=""><strong>POOL</strong><small>Betrouwbaar</small></a>
+    <div class="stream to green" aria-hidden="true"></div>
+    <a class="node ok" href="pages/coming-soon.html"><img src="assets/servers.svg" alt=""><strong>SERVERS</strong><small>Applications</small></a>
+    <div class="racks" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  </div>
+</div>
+</div>
+
+<div class="w metrics">
+  <div class="metric"><div class="t"><img src="assets/metric-connections.svg" alt="">Live connections</div><b class="osw" id="m1">12.842</b><em>+8.7%</em><svg class="sp" viewBox="0 0 68 20"><polyline points="1,16 12,13 22,14 32,8 42,11 52,5 67,3"/></svg></div>
+  <div class="metric"><div class="t"><img src="assets/metric-requests.svg" alt="">Requests / sec</div><b class="osw" id="m2">45.231</b><em>+12.3%</em><svg class="sp" viewBox="0 0 68 20"><polyline points="1,15 14,14 24,10 34,11 44,6 54,8 67,2"/></svg></div>
+  <div class="metric"><div class="t"><img src="assets/metric-tls.svg" alt="">TLS handshakes / sec</div><b class="osw" id="m3">3.204</b><em>+6.1%</em><svg class="sp" viewBox="0 0 68 20"><polyline points="1,16 16,12 28,13 40,8 52,10 67,5"/></svg></div>
+  <div class="metric"><div class="t"><img src="assets/metric-uptime.svg" alt="">Uptime</div><b class="osw">99.99%</b><em>30D</em><svg class="sp" viewBox="0 0 68 20"><polyline points="1,8 14,7 24,8 36,6 48,7 58,5 67,4"/></svg></div>
+</div>
+
+<section id="expertise">
+  <div class="w">
+    <div class="split">
+      <div><p class="k">F5 SPECIALISTEN</p><h2 class="osw">Diepgaande expertise.<br>Praktische impact<span class="sq" aria-hidden="true"></span></h2></div>
+      <p class="copy">F5-gecertificeerde expertise voor complexe, bedrijfskritische omgevingen binnen overheid en enterprise.</p>
+    </div>
+    <div class="cards">
+      <a class="card" href="pages/coming-soon.html"><img src="assets/architecture.svg" alt=""><h3>ARCHITECTURE &amp; DESIGN</h3><p>High availability, performance en security by design.</p><i>→</i></a>
+      <a class="card" href="pages/coming-soon.html"><img src="assets/implementation.svg" alt=""><h3>IMPLEMENTATION</h3><p>Implementatie van BIG-IP omgevingen volgens best practices.</p><i>→</i></a>
+      <a class="card" href="pages/coming-soon.html"><img src="assets/optimization.svg" alt=""><h3>OPTIMIZATION</h3><p>Performance tuning, capaciteit en configuratie-optimalisatie.</p><i>→</i></a>
+      <a class="card" href="pages/coming-soon.html"><img src="assets/troubleshooting.svg" alt=""><h3>TROUBLESHOOTING</h3><p>Complexe probleemoplossing. Snel, grondig en resultaatgericht.</p><i>→</i></a>
+      <a class="card" href="pages/coming-soon.html"><img src="assets/migrations.svg" alt=""><h3>MIGRATIONS &amp; UPGRADES</h3><p>Migraties, upgrades en modernisaties zonder impact op business.</p><i>→</i></a>
+      <a class="card" href="pages/coming-soon.html"><img src="assets/automation.svg" alt=""><h3>AUTOMATION &amp; IRULES</h3><p>iRules, API automation en integratie met DevOps toolchains.</p><i>→</i></a>
+    </div>
+  </div>
+</section>
+
+<section id="unifi">
+  <div class="w">
+    <div class="split">
+      <div><p class="k">UBIQUITI UNIFI</p><h2 class="osw">Network &amp; Protect.<br>Eén ecosysteem<span class="sq" aria-hidden="true"></span></h2></div>
+      <p class="copy">Naast F5 ontwerpen, implementeren en beheren we UniFi-omgevingen. Van switching en Wi-Fi tot camerabewaking met Protect — overzichtelijk, schaalbaar en beheerbaar.</p>
+    </div>
+    <div class="ucards">
+      <a class="ucard" href="pages/coming-soon.html">
+        <img src="assets/unifi-network.svg" alt="">
+        <h3>UNIFI NETWORK</h3>
+        <p>Ontwerp en beheer van UniFi-netwerken: access points, switching, gateways, VLAN’s, VPN en monitoring vanuit één controller.</p>
+        <ul><li>Wi-Fi</li><li>Switching</li><li>Gateway</li><li>VPN</li></ul>
+        <i>→</i>
+      </a>
+      <a class="ucard protect" href="pages/coming-soon.html">
+        <img src="assets/unifi-protect.svg" alt="">
+        <h3>UNIFI PROTECT</h3>
+        <p>Camerasystemen, NVR’s en opnamebeleid. Slimme detectie, rechten en remote toegang — geïntegreerd met hetzelfde UniFi-ecosysteem.</p>
+        <ul><li>Camera’s</li><li>NVR</li><li>Detectie</li><li>Remote</li></ul>
+        <i>→</i>
+      </a>
+    </div>
+    <div class="upoints">
+      <a class="upoint" href="pages/coming-soon.html"><img src="assets/unifi-wifi.svg" alt=""><b>WI-FI DESIGN</b><p>Dekking, RF-tuning en roaming dat gewoon werkt.</p></a>
+      <a class="upoint" href="pages/coming-soon.html"><img src="assets/unifi-switch.svg" alt=""><b>SWITCHING</b><p>VLAN’s, PoE en een netwerk dat overzichtelijk blijft.</p></a>
+      <a class="upoint" href="pages/coming-soon.html"><img src="assets/unifi-gateway.svg" alt=""><b>GATEWAY &amp; VPN</b><p>Firewall, site-to-site en veilig remote werken.</p></a>
+      <a class="upoint" href="pages/coming-soon.html"><img src="assets/unifi-nvr.svg" alt=""><b>PROTECT &amp; NVR</b><p>Opname, retentie en camerabeheer zonder gedoe.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="w cr">
+    <div>
+      <p class="k">F5 GECERTIFICEERD</p>
+      <h2 class="osw">Geverifieerde<br>expertise<span class="cursor" aria-hidden="true"></span></h2>
+    </div>
+    <div class="certs-row">
+      <a class="cell" href="pages/coming-soon.html">
+        <div class="top"><img src="401.png" alt="(401) F5 Certified Solution Expert, Security"></div>
+        <small>(401) F5 CERTIFIED<br>Solution Expert, Security</small>
+      </a>
+      <a class="cell" href="pages/coming-soon.html">
+        <div class="top"><img src="402.png" alt="(402) F5 Certified Solution Expert, Cloud"></div>
+        <small>(402) F5 CERTIFIED<br>Solution Expert, Cloud</small>
+      </a>
+      <div class="cell">
+        <div class="top"><div class="n osw">10+</div></div>
+        <div class="m osw">JAAR</div>
+        <div class="s">F5 ERVARING</div>
+      </div>
+      <div class="cell">
+        <div class="top"><div class="n osw">50+</div></div>
+        <div class="m osw">PROJECTEN</div>
+        <div class="s">IN OVERHEID &amp; ENTERPRISE</div>
+      </div>
+      <div class="cell">
+        <div class="top"><div class="n osw">100%</div></div>
+        <div class="m osw">FOCUS</div>
+        <div class="s">OP F5 BIG-IP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="w">
+    <div class="trust-top">
+      <div>
+        <p class="k">VERTROUWD DOOR</p>
+        <h2 class="osw">Critical systems.<br>Trusted delivery<span class="d">_</span></h2>
+      </div>
+      <div class="vals">
+        <a class="v" href="pages/coming-soon.html"><img src="assets/overheid.svg" alt=""><b>OVERHEID</b><p>Diepgaande kennis van publieke omgevingen.</p></a>
+        <div class="v"><img src="assets/betrouwbaar.svg" alt=""><b>BETROUWBAAR</b><p>Discreet, professioneel en betrouwbaar partnership.</p></div>
+        <a class="v" href="pages/coming-soon.html"><img src="assets/beschikbaar.svg" alt=""><b>24/7 BESCHIKBAAR</b><p>Support wanneer het er echt toe doet.</p></a>
+        <a class="v" href="pages/coming-soon.html"><img src="assets/resultaat.svg" alt=""><b>RESULTAATGERICHT</b><p>Oplossingen die impact maken.</p></a>
+      </div>
+    </div>
+    <p class="note">Wij werken voor organisaties waar uptime geen optie is, maar een vereiste.</p>
+    <div class="logos">
+      <img src="assets/logo-politie.svg" alt="Politie">
+      <img src="assets/logo-defensie.svg" alt="Defensie">
+      <img src="assets/logo-rotterdam.svg" alt="Gemeente Rotterdam">
+      <img src="assets/logo-belastingdienst.svg" alt="Belastingdienst">
+      <img src="assets/logo-waterschap.svg" alt="Waterschap Limburg">
+      <span class="more">EN MEER...</span>
+    </div>
+  </div>
+</section>
+
+<div class="w">
+  <div class="cta">
+    <div>
+      <h2 class="osw">Klaar voor een stabiele F5- of UniFi-omgeving?</h2>
+      <p>Laten we kennismaken. We denken graag met je mee.</p>
+    </div>
+    <a class="redbtn" href="pages/coming-soon.html">Plan een gesprek →</a>
+  </div>
+</div>
+</main>
+<footer>TRIPLET IT · F5 CONSULTANCY</footer>
+<script>
+document.getElementById('ham').onclick=()=>document.getElementById('mob').classList.toggle('open');
+document.querySelectorAll('.stream').forEach(s=>{
+  const color=s.classList.contains('green')?'#39e070':'#e31c24';
+  const n=s.classList.contains('mid')?20:16;
+  for(let k=0;k<n;k++){
+    const i=document.createElement('i');
+    const size=s.classList.contains('mid')?4:3;
+    i.style.cssText=`width:${size}px;height:${size}px;background:${color};box-shadow:0 0 8px ${color};top:${18+Math.random()*64}%;animation-delay:${Math.random()*1.2}s;animation-duration:${.85+Math.random()*.5}s`;
+    s.appendChild(i);
+  }
+});
+const v=[[12842,45],[45231,90],[3204,11]],id=['m1','m2','m3'];
+setInterval(()=>v.forEach((x,i)=>{x[0]+=Math.round((Math.random()-.47)*x[1]);const e=document.getElementById(id[i]);if(e)e.textContent=x[0].toLocaleString('nl-NL')}),1400);
+
+(function(){
+  const pre=document.getElementById('tmsh-cfg');
+  const st=document.getElementById('tmsh-st');
+  if(!pre||!st) return;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const src=[
+    'ltm virtual /Common/production_https {',
+    '  destination 10.10.20.15:https',
+    '  ip-protocol tcp',
+    '  profiles {',
+    '    clientssl { }',
+    '    http { }',
+    '    tcp-wan-optimized { }',
+    '  }',
+    '  pool /Common/web_pool',
+    '  rules {',
+    '    https_redirect',
+    '    security_policy',
+    '  }',
+    '}'
+  ].join('\n');
+  const checks=['APPLICATION AVAILABLE','TLS SECURED','TRAFFIC OPTIMIZED','SECURITY ENFORCED'];
+  const paint=s=>s.replace(/(\/Common\/[\w_]+|\d+(?:\.\d+){3}:https|ltm|virtual|destination|ip-protocol|profiles|pool|rules)/g,(m)=>
+    (m.startsWith('/')||m[0]<='9')?`<span class="c-w">${m}</span>`:`<span class="c-b">${m}</span>`);
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  let stop=false;
+  if(reduce) return;
+  async function run(){
+    while(!stop){
+      pre.innerHTML='<span class="cur"></span>';
+      st.innerHTML='';
+      for(let i=1;i<=src.length;i++){
+        if(stop) return;
+        pre.innerHTML=paint(src.slice(0,i))+'<span class="cur"></span>';
+        const ch=src[i-1];
+        await wait(ch==='\n'?70:ch===' '?10:15);
+      }
+      await wait(350);
+      for(const line of checks){
+        if(stop) return;
+        const row=document.createElement('div');
+        row.textContent='[✓] '+line;
+        st.appendChild(row);
+        await wait(420);
+      }
+      const cur=pre.querySelector('.cur');
+      if(cur) cur.remove();
+      await wait(5600);
+    }
+  }
+  const io=new IntersectionObserver(entries=>{
+    const on=entries[0].isIntersecting;
+    if(on){ if(stop){ stop=false; run(); } }
+    else stop=true;
+  },{threshold:.2});
+  stop=false;
+  run();
+  io.observe(pre.closest('.term'));
+})();
+</script>
+<script src="assets/world-map.js"></script>
+</body>
+</html>

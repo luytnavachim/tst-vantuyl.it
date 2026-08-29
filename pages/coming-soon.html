@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Binnenkort beschikbaar — Triplet IT</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e31c24;--muted:#9aa3aa}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#000;color:#f4f5f6;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+.osw{font-family:Oswald,Impact,"Arial Narrow",sans-serif;text-transform:uppercase}
+header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.92)}
+.nav{height:72px;width:min(1140px,calc(100% - 64px));margin-inline:auto;display:flex;align-items:center}
+.brand{display:flex;align-items:center;gap:10px}
+.bars{width:20px;display:grid;gap:3px}
+.bars i{display:block;height:2.5px;background:var(--red)}
+.bars i:nth-child(1){width:20px}.bars i:nth-child(2){width:14px;margin-left:6px}.bars i:nth-child(3){width:17px;margin-left:3px}
+.brand b{display:block;font-size:15px;letter-spacing:.6px;font-weight:800}
+.brand small{display:block;margin-top:3px;font-size:8px;letter-spacing:1.7px;color:var(--red);font-weight:700}
+main{
+  flex:1;display:flex;align-items:center;justify-content:center;padding:48px 32px 72px;text-align:center;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(227,28,36,.16),transparent 42%),
+    radial-gradient(ellipse at 80% 80%,rgba(26,166,255,.08),transparent 46%);
+}
+.wrap{max-width:560px}
+.ey{color:var(--red);font-size:12px;font-weight:800;letter-spacing:1.8px;margin:0 0 18px}
+h1{margin:0;font-size:clamp(36px,5vw,56px);line-height:.92;font-weight:600}
+h1 .sq{display:inline-block;width:12px;height:12px;margin-left:8px;background:var(--red);vertical-align:middle;transform:translateY(-7px)}
+p{margin:22px auto 0;max-width:42ch;color:#c5ccd1;font-size:15px;line-height:1.7;font-weight:500}
+.redbtn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;margin-top:32px;background:linear-gradient(180deg,#f13a42,#d4141c);color:#fff;font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;border:0;border-radius:10px;box-shadow:0 0 24px rgba(227,28,36,.28)}
+footer{padding:0 0 36px;text-align:center;color:#5a6369;font-size:11px;letter-spacing:1.3px}
+@media(max-width:620px){.nav,main{width:auto}main{padding:36px 20px 56px}.nav{width:calc(100% - 32px)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="../index.html"><span class="bars"><i></i><i></i><i></i></span><span><b>TRIPLET IT</b><small>F5 CONSULTANCY</small></span></a>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <p class="ey">BINNENKORT BESCHIKBAAR</p>
+    <h1 class="osw">Deze pagina<br>is in ontwikkeling<span class="sq" aria-hidden="true"></span></h1>
+    <p>We werken nog aan deze inhoud. Kom later terug, of ga terug naar de homepage.</p>
+    <a class="redbtn" href="../index.html">Terug naar home →</a>
+  </div>
+</main>
+<footer>TRIPLET IT · F5 CONSULTANCY</footer>
+</body>
+</html>
