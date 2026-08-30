@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
-# Eenmalig op de Hetzner-server draaien (als root of de user die de site mag schrijven).
-# Maakt een deploy-sleutel en toont de waarden voor GitHub Actions secrets.
+# Eenmalig op de Hetzner-server draaien (als de user die de site mag schrijven).
+# Maakt een deploy-sleutel. Output is te parsen door scripts/finish-deploy-from-mac.sh.
 set -euo pipefail
 
 KEY_DIR="${HOME}/.ssh"
 KEY_FILE="${KEY_DIR}/github-deploy-tst"
-HOST_IP="$(curl -fsS --max-time 5 https://ifconfig.me || hostname -I | awk '{print $1}')"
+HOST_IP="$(curl -fsS --max-time 5 https://ifconfig.me 2>/dev/null || hostname -I | awk '{print $1}')"
 SITE_PATH="${DEPLOY_PATH:-}"
 
+find_docroot() {
+  local conf=""
+  for dir in /etc/apache2/sites-enabled /etc/apache2/sites-available; do
+    [ -d "$dir" ] || continue
+    conf="$(grep -lR --include='*.conf' 'tst.vantuyl.it' "$dir" 2>/dev/null | head -1 || true)"
+    [ -n "$conf" ] && break
+  done
+  if [ -n "$conf" ]; then
+    awk '/^[[:space:]]*DocumentRoot/{print $2; exit}' "$conf"
+  fi
+}
+
 if [ -z "${SITE_PATH}" ]; then
-  if command -v apache2ctl >/dev/null 2>&1; then
-    SITE_PATH="$(apache2ctl -S 2>/dev/null | awk '/tst\.vantuyl\.it/{f=1} f && /port/{print}' | head -1 || true)"
-  fi
-  if [ -z "${SITE_PATH}" ] && [ -d /etc/apache2/sites-enabled ]; then
-    SITE_PATH="$(grep -Rhs 'DocumentRoot' /etc/apache2/sites-enabled 2>/dev/null | awk '{print $2}' | head -1 || true)"
-  fi
+  SITE_PATH="$(find_docroot || true)"
   SITE_PATH="${SITE_PATH:-/var/www/tst.vantuyl.it}"
+fi
+
+if [ ! -d "${SITE_PATH}" ]; then
+  echo "Waarschuwing: ${SITE_PATH} bestaat niet. Zet DEPLOY_PATH=... en run opnieuw." >&2
 fi
 
 mkdir -p "${KEY_DIR}"
@@ -30,21 +41,11 @@ chmod 600 "${AUTH}"
 PUB="$(cat "${KEY_FILE}.pub")"
 grep -qxF "${PUB}" "${AUTH}" || echo "${PUB}" >> "${AUTH}"
 
-echo
-echo "Klaar. Zet deze secrets in GitHub:"
-echo "  repo → Settings → Secrets and variables → Actions"
-echo
-echo "DEPLOY_HOST"
-echo "${HOST_IP}"
-echo
-echo "DEPLOY_USER"
-echo "$(whoami)"
-echo
-echo "DEPLOY_PATH"
-echo "${SITE_PATH}"
-echo
-echo "DEPLOY_KEY"
-echo "(plak de hele private key hieronder, inclusief BEGIN/END regels)"
-echo
+echo "---BEGIN SECRETS---"
+echo "DEPLOY_HOST=${HOST_IP}"
+echo "DEPLOY_USER=$(whoami)"
+echo "DEPLOY_PATH=${SITE_PATH}"
+echo "---END SECRETS---"
+echo "---BEGIN DEPLOY_KEY---"
 cat "${KEY_FILE}"
-echo
+echo "---END DEPLOY_KEY---"
