@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Triplet IT — F5 Consultancy</title>
 <meta name="theme-color" content="#000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,14 +12,14 @@
 :root{--red:#e31c24;--blue:#1aa6ff;--green:#39e070;--muted:#9aa3aa;--line:#1c2228}
 *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(227,28,36,.15)}
 html{scroll-behavior:smooth}
-body{margin:0;background:#000;color:#f4f5f6;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+body{margin:0;background:#000;color:#f4f5f6;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button{-webkit-user-select:none;user-select:none}
 img{display:block;max-width:100%}
 .w{width:min(1140px,calc(100% - 64px));margin-inline:auto}
 .osw{font-family:Oswald,Impact,"Arial Narrow",sans-serif;text-transform:uppercase}
 
-header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.92)}
+header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.92);padding-top:env(safe-area-inset-top)}
 .nav{height:72px;display:flex;align-items:center;gap:24px}
 .brand{display:flex;align-items:center;gap:10px}
 .bars{width:20px;display:grid;gap:3px}
@@ -62,13 +62,14 @@ h1 .sq{display:inline-block;width:13px;height:13px;margin-left:8px;background:va
 .th{height:36px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;background:#10171c;border:0;font:12px ui-monospace,Menlo,monospace;color:#c9d2d7}
 .ds{display:flex;gap:6px}.ds i{width:10px;height:10px;border-radius:50%}
 .ds i:nth-child(1){background:#ff5f57}.ds i:nth-child(2){background:#febc2e}.ds i:nth-child(3){background:#28c840}
-pre{margin:0;padding:16px 16px 10px;min-height:248px;font:12.4px/1.55 ui-monospace,Menlo,monospace;color:#c5ccd3}
+pre{margin:0;padding:16px 16px 10px;min-height:248px;font:12.4px/1.55 ui-monospace,Menlo,monospace;color:#c5ccd3;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .c-b{color:#6cb6ff}.c-g{color:#3dff7a}.c-w{color:#f4f6f7}
 .st{padding:12px 16px 16px;min-height:92px;border:0;background:#080c0f;font:11.5px/1.75 ui-monospace,Menlo,monospace;color:#3dff7a}
 .term .cur{display:inline-block;width:7px;height:13px;margin-left:1px;background:#3dff7a;vertical-align:-2px;animation:blink 1.05s step-end infinite}
 .st div{opacity:0;transform:translateY(5px);animation:stin .38s ease forwards}
 @keyframes blink{50%{opacity:0}}
 @keyframes stin{to{opacity:1;transform:none}}
+@keyframes drift-v{from{transform:translate(-50%,-6px);opacity:.15}18%{opacity:1}82%{opacity:1}to{transform:translate(-50%,28px);opacity:.1}}
 
 .flowbox{padding:8px 0 28px;position:relative;overflow:visible;z-index:1}
 .flowbox:after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:60px;height:160px;background:linear-gradient(90deg,transparent,rgba(0,0,0,.7));pointer-events:none;z-index:2;opacity:0;transition:opacity .3s}
@@ -199,7 +200,7 @@ h2 .sq{display:inline-block;width:12px;height:12px;margin-left:8px;background:va
 .cta{margin:8px 0 42px;padding:36px 0 8px;display:flex;align-items:center;justify-content:space-between;gap:28px}
 .cta h2{max-width:16ch}
 .cta p{margin:10px 0 0;color:#b7c0c5}
-foot,footer{padding:0 0 36px;text-align:center;color:#5a6369;font-size:11px;letter-spacing:1.3px}
+foot,footer{padding:0 0 calc(36px + env(safe-area-inset-bottom));text-align:center;color:#5a6369;font-size:11px;letter-spacing:1.3px}
 
 @media(max-width:980px){
   .menu,.out{display:none}.ham{display:block}
@@ -215,59 +216,58 @@ foot,footer{padding:0 0 36px;text-align:center;color:#5a6369;font-size:11px;lett
   .metric + .metric{border:0}
   .logos{justify-content:flex-start}
   .cta{flex-direction:column;align-items:flex-start}
-  .flowbox:after{opacity:1}
-  .arch-row{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;padding:8px 0}
-  .arch-row::-webkit-scrollbar{height:4px}
-  .arch-row::-webkit-scrollbar-track{background:#0a0e13}
-  .arch-row::-webkit-scrollbar-thumb{background:#1c2228;border-radius:2px}
+  .flowbox:after{display:none}
   .racks{display:none}
   .w{width:min(100%,calc(100% - 32px))}
   .hero{padding:56px 0 28px}
   .term{border-radius:12px}
-  pre{padding:14px;font-size:11.5px;min-height:220px}
+  pre{padding:14px;font-size:11.5px;min-height:200px}
   .th{font-size:11px}
   .st{padding:10px 14px 14px;font-size:11px}
+  .arch-row{flex-direction:column;overflow:visible;gap:0}
+  .node{width:100%;min-width:0;min-height:78px;flex-direction:row;justify-content:flex-start;text-align:left;padding:14px 16px;gap:14px}
+  .node img{width:32px;height:32px;flex-shrink:0}
+  .stream,.stream.from,.stream.to,.stream.mid{width:100%;height:22px;flex:0 0 22px;clip-path:none}
+  .stream i{left:50%!important;top:0!important;animation-name:drift-v;animation-duration:.9s}
 }
 @media(max-width:620px){
-  .cards,.vals,.metrics,.certs-row,.ucards,.upoints{grid-template-columns:1fr}
+  .cards,.vals,.ucards,.upoints{grid-template-columns:1fr}
+  .metrics,.certs-row{grid-template-columns:1fr 1fr}
   .v,.v:nth-child(n+3){border:0;padding:18px 0 8px}
   .v:first-child{padding-top:0}
   .cell + .cell{border:0}
   section{padding:52px 0}
-  h1{font-size:36px}
+  h1{font-size:34px}
   .w{width:min(100%,calc(100% - 24px))}
   .nav{height:64px;gap:16px}
   .brand b{font-size:14px}
   .brand small{font-size:7.5px}
-  .hero{padding:42px 0 24px}
+  .hero{padding:36px 0 20px}
   .ey{font-size:11px;margin-bottom:14px}
-  .lead{font-size:14px;margin:18px 0 24px}
-  .acts{gap:16px}
-  .redbtn{height:44px;padding:0 18px;font-size:11px}
-  .link{font-size:11px}
+  .lead{font-size:14px;margin:16px 0 20px}
+  .acts{flex-direction:column;align-items:stretch;gap:10px}
+  .redbtn,.link{display:flex;align-items:center;height:46px;padding:0 18px;font-size:11px;justify-content:center;width:100%}
+  .link{border:1px solid #2a3136;border-radius:10px}
   .term{border-radius:10px}
   .th{height:32px;padding:0 12px;font-size:10px}
   .ds i{width:9px;height:9px}
-  pre{padding:12px;font-size:10.5px;line-height:1.5;min-height:180px}
-  .st{padding:10px 12px 12px;font-size:10.5px;min-height:80px}
-  .flowbox{padding:6px 0 20px}
-  .node{min-height:132px;min-width:100px;padding:14px 8px;border-radius:10px}
-  .node img{width:36px;height:36px}
-  .node strong{font-size:11px}
+  pre{padding:12px;font-size:10.5px;line-height:1.5;min-height:168px}
+  .st{padding:10px 12px 12px;font-size:10.5px;min-height:72px}
+  .flowbox{padding:6px 0 16px}
+  .node{min-height:72px;padding:12px 14px;border-radius:10px}
+  .node strong{font-size:12px}
   .node small{font-size:10px}
-  .stream{width:32px;height:72px;flex:0 0 32px}
-  .stream.mid{height:46px}
-  .metrics{border-radius:12px;margin-top:20px}
-  .metric{padding:16px 16px;min-height:86px}
-  .metric .t{font-size:9.5px;gap:8px}
-  .metric img{width:24px;height:24px}
-  .metric b{margin-top:8px;font-size:24px}
-  .metric em{font-size:10px}
-  .sp{width:60px;height:18px;right:12px;bottom:12px}
+  .metrics{border-radius:12px;margin-top:18px}
+  .metric{padding:14px 12px;min-height:80px}
+  .metric .t{font-size:9px;gap:6px}
+  .metric img{width:22px;height:22px}
+  .metric b{margin-top:8px;font-size:22px}
+  .metric em{font-size:9.5px;margin-left:4px}
+  .sp{width:52px;height:16px;right:10px;bottom:10px}
   .k{font-size:10px;margin-bottom:8px}
-  h2{font-size:clamp(28px,8vw,38px)}
+  h2{font-size:clamp(26px,8vw,36px)}
   .copy{font-size:14px}
-  .card,.ucard{padding:20px 18px;min-height:190px}
+  .card,.ucard{padding:20px 18px;min-height:180px}
   .card img,.ucard img{width:32px;height:32px}
   .card h3,.ucard h3{font-size:13px;margin:14px 0 7px}
   .card p,.ucard p{font-size:12.5px}
@@ -277,28 +277,31 @@ foot,footer{padding:0 0 36px;text-align:center;color:#5a6369;font-size:11px;lett
   .upoint img{width:26px;height:26px}
   .upoint b{font-size:11px;margin:10px 0 5px}
   .upoint p{font-size:12.5px}
-  .cell{padding:18px 10px 16px}
-  .cell .top{height:96px}
-  .cell img{width:88px;height:88px}
+  .cell{padding:16px 8px 14px}
+  .cell .top{height:88px}
+  .cell img{width:80px;height:80px}
   .cell small{font-size:9.5px;margin-top:7px}
-  .cell .n{font-size:clamp(26px,7vw,34px)}
-  .cell .m{font-size:15px;margin-top:7px}
-  .cell .s{font-size:9.5px;margin-top:7px}
-  .note{margin:36px 0 22px;font-size:10px}
-  .logos img{height:34px;max-width:140px}
+  .cell .n{font-size:clamp(24px,7vw,32px)}
+  .cell .m{font-size:14px;margin-top:6px}
+  .cell .s{font-size:9px;margin-top:6px}
+  .note{margin:32px 0 20px;font-size:10px}
+  .logos{gap:16px}
+  .logos img{height:32px;max-width:130px}
   .logos .more{font-size:9.5px}
-  .cta{margin:6px 0 36px;padding:28px 0 6px}
-  .cta h2{font-size:clamp(26px,7.5vw,34px)}
+  .cta{margin:6px 0 32px;padding:24px 0 6px;width:100%}
+  .cta h2{font-size:clamp(24px,7.5vw,32px);max-width:none}
   .cta p{font-size:14px}
-  foot,footer{padding:0 0 28px;font-size:10px}
+  .cta .redbtn{width:100%}
+  foot,footer{padding:0 0 calc(28px + env(safe-area-inset-bottom));font-size:10px}
 }
 @media(max-width:380px){
   .w{width:min(100%,calc(100% - 20px))}
-  h1{font-size:32px;line-height:1}
+  h1{font-size:30px;line-height:1}
   .lead{font-size:13.5px}
-  .redbtn{height:42px;padding:0 16px;font-size:10.5px}
-  pre{font-size:10px;padding:10px}
+  .redbtn,.link{height:44px;padding:0 16px;font-size:10.5px}
+  pre{font-size:10px;padding:10px;min-height:150px}
   .st{font-size:10px}
+  .metric b{font-size:20px}
   .card h3,.ucard h3{font-size:12.5px}
   .card p,.ucard p{font-size:12px}
 }
