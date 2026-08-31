@@ -1,0 +1,8 @@
+{
+  "id": "tst-vantuyl.it",
+  "name": "tst.vantuyl.it",
+  "path": "~/Documents/tst-vantuyl.it",
+  "branch": "main",
+  "postPushHook": "ssh root@95.217.203.120 /usr/local/bin/sync-tst-vantuyl.sh",
+  "pullHook": "ssh root@95.217.203.120 /usr/local/bin/sync-tst-vantuyl.sh"
+}
